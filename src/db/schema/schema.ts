@@ -111,7 +111,7 @@ export const pets = pgTable('pet', {
 export const petsRelations = relations(pets, ({ one }) => ({
   user: one(users, {
     fields: [pets.userId],
-    references: [users.email]
+    references: [users.id]
   }),
   pets: one(categories, {
     fields: [pets.category],
