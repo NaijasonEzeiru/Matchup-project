@@ -13,7 +13,10 @@ export default async function middleware(req) {
     cook_secure: req.cookies.get('__Secure-next-auth.session-token')
   });
 
-  const auth_cookie = req.cookies.get('next-auth.session-token');
+  const auth_cookie =
+    req.cookies.get('next-auth.session-token') ||
+    req.cookies.get('__Secure-next-auth.session-token');
+
   // if (
   //   !req.cookies.has('next-auth.session-token') &&
   //   req.cookies.has('__Secure-next-auth.session-token')
