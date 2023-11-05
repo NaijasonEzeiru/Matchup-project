@@ -62,6 +62,11 @@ const Profile = async ({ params }: { params: { id: string } }) => {
               <p>My Pet Adverts</p>
             </Link>
             <Link
+              href={`/pet/new-pet`}
+              className='w-full p-3 bg-primaryBg rounded-lg hover:bg-secondaryBg hover:shadow hover:shadow-ctaColor transition-all hover:transition-all'>
+              <p>Upload a pet</p>
+            </Link>
+            <Link
               href={'#'}
               className='w-full p-3 bg-primaryBg rounded-lg hover:bg-secondaryBg hover:shadow hover:shadow-ctaColor transition-all hover:transition-all'>
               <p>Edit Profile</p>

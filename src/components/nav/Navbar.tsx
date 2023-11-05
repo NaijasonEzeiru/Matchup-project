@@ -144,11 +144,14 @@ const NavBar = () => {
               : 'grid-rows-[0fr]'
           }`}>
           <div
-            className='max-h-full overflow-hidden items-center w-max flex flex-col gap-2'
+            className='max-h-full overflow-hidden items-center w-max flex flex-col gap-3'
             onClick={() => setShowUserDropdown(false)}>
             <Link href={`/dashboard/${session.data?.user?.id}`}>Dashboard</Link>
             {/* <Link href={`/dashboard/${session.data?.user?.id}`}>Profile</Link> */}
             <Link href={'#'}> My Pets</Link>
+            {/* {session.status === 'authenticated' && ( */}
+            <Link href={'/pet/new-pet'}> Upload a Pet</Link>
+            {/* )} */}
             {session.status !== 'authenticated' ? (
               <Link href={'/auth/login'}>
                 {' '}
