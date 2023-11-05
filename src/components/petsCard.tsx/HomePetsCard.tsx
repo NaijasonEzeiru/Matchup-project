@@ -5,6 +5,8 @@ import { db } from '@/db/db';
 import { ilike, or } from 'drizzle-orm';
 import { pets } from '@/db/schema/schema';
 
+export const dynamic = 'force-dynamic';
+
 async function fetchPets(q: string | null) {
   'use server';
   try {
