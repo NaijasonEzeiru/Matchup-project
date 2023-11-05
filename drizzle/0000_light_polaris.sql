@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"name" varchar(120) NOT NULL,
 	"password_hash" varchar(120),
 	"email" varchar(120) NOT NULL,
-	"email_verified" timestamp,
+	"emailVerified" timestamp,
 	"image" text,
 	"role" text DEFAULT 'user' NOT NULL,
 	"phone" varchar(20) NOT NULL,

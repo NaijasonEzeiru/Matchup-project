@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "87cd7517-dcd8-4688-adf1-badd9b0f3e52",
+  "id": "f4289140-0c0d-42b2-914b-99e039db087d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "account": {
@@ -319,8 +319,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "email_verified": {
-          "name": "email_verified",
+        "emailVerified": {
+          "name": "emailVerified",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
