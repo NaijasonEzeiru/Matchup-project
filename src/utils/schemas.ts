@@ -155,7 +155,7 @@ export const PetSchema = z.object({
   purebred: z
     .string()
     .min(2, { message: 'Select Yes or No' })
-    .max(4, { message: 'Too long!' }),
+    .max(10, { message: 'Too long!' }),
   age: z
     .string()
     .min(2, { message: 'Select the age' })
