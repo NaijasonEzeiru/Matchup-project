@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "4235e631-ad36-49b3-8e4c-0b816da0b5d7",
-  "prevId": "d0ba36d0-4b87-4bd5-af86-767e51029141",
+  "id": "07cecd7c-9b2b-4bd9-b812-87bf6705cec6",
+  "prevId": "87cd7517-dcd8-4688-adf1-badd9b0f3e52",
   "tables": {
     "account": {
       "name": "account",
@@ -319,8 +319,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "email_verified": {
-          "name": "email_verified",
+        "emailVerified": {
+          "name": "emailVerified",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
@@ -415,7 +415,7 @@
     "schemas": {},
     "tables": {},
     "columns": {
-      "\"account\".\"provider_account_id\"": "\"account\".\"providerAccountId\""
+      "\"user\".\"email_verified\"": "\"user\".\"emailVerified\""
     }
   }
 }

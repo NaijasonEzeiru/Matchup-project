@@ -23,7 +23,7 @@ export const users = pgTable('user', {
   name: varchar('name', { length: 120 }).notNull(),
   passwordHash: varchar('password_hash', { length: 120 }),
   email: varchar('email', { length: 120 }).notNull().unique(),
-  emailVerified: timestamp('email_verified', { mode: 'date' }),
+  emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   role: text('role', { enum: ['admin', 'user', 'moderator'] })
     .default('user')
