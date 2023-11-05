@@ -201,7 +201,9 @@ const Register = () => {
                 Privacy Policy
               </Link>{' '}
               &
-              <Link href={'/terms-condition'} className='text-ctaColor italic'>
+              <Link
+                href={'/terms-and-conditions'}
+                className='text-ctaColor italic'>
                 {' '}
                 Terms and Conditions
               </Link>
