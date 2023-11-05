@@ -7,7 +7,7 @@ import { db } from '@/db/db';
 import { eq } from 'drizzle-orm';
 import { users } from '@/db/schema/schema';
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db),
   providers: [
     GithubProvider({
