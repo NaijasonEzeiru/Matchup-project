@@ -173,7 +173,6 @@ export const PetSchema = z.object({
     .string()
     .min(10, { message: 'Too short' })
     .max(200, { message: 'Too long' }),
-  userEmail: z.string(),
   userId: z.string().optional(),
   updatedAt: z.string().optional()
 });
