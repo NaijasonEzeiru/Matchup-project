@@ -17,7 +17,15 @@ const nextConfig = {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     DATABASE_URL: process.env.DATABASE_URL
   },
-  experimental: { serverActions: true }
+  experimental: { serverActions: true },
+  webpack: (config, { webpack }) => {
+    config.plugins.push(
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^pg-native$|^cloudfare:sockets$/
+      })
+    );
+    return config;
+  }
 };
 
 module.exports = nextConfig;

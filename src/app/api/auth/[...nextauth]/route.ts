@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CryptoJS from 'crypto-js';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -7,7 +7,7 @@ import { db } from '@/db/db';
 import { eq } from 'drizzle-orm';
 import { users } from '@/db/schema/schema';
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db),
   providers: [
     GithubProvider({
@@ -21,7 +21,7 @@ const handler = NextAuth({
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials, req) {
-        if (!credentials?.email || !credentials.password) {
+        if (!credentials?.email || !credentials?.password) {
           return null;
         } else {
           try {
@@ -74,18 +74,19 @@ const handler = NextAuth({
     maxAge: 30 * 24 * 60 * 60 // 30 days
   },
   debug: process.env.NODE_ENV === 'development',
-  // pages: {
-  //   signIn: '/auth/login',
-  //   error: '/auth/login'
-  // },
+  pages: {
+    signIn: '/auth/login',
+    error: '/auth/login'
+  },
   callbacks: {
-    // jwt({ token, account, user }) {
-    //   if (account) {
-    //     token.accessToken = account.access_token;
-    //     token.id = user?.id;
-    //   }
-    //   return token;
-    // }
+    jwt({ token, account, user }) {
+      if (account) {
+        console.log(account);
+        token.accessToken = account.access_token;
+        token.id = user?.id;
+      }
+      return token;
+    },
     session: ({ session, token }) => ({
       ...session,
       user: { ...session.user, id: token.sub }
@@ -93,13 +94,8 @@ const handler = NextAuth({
       // return session;
     })
   }
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-
-// import NextAuth from 'next-auth';
-// import { options } from './options';
-
-// const handler = NextAuth(options);
-
-// export { handler as GET, handler as POST };
