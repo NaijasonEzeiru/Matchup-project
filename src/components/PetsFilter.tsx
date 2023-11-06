@@ -6,9 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { places, cat } from '@/utils/jsons';
 import { FilterPetSchema, FilterPetSchemaType } from '../utils/schemas';
 import { SelectInput } from '@/components/helpers/InputFields';
+import { TbFilterOff, TbFilter } from 'react-icons/tb';
 
 function PetsFilter() {
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
 
   const {
     register,
@@ -119,7 +120,7 @@ function PetsFilter() {
           !showFilter && 'rotate-180'
         }`}
         onClick={() => setShowFilter(!showFilter)}>
-        &uarr;
+        {showFilter ? <TbFilterOff /> : <TbFilter />}
       </button>
     </div>
   );

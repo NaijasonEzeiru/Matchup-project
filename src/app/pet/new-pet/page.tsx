@@ -51,7 +51,7 @@ const AddPets = () => {
 
   let breeds: string[] = [];
   if (cat?.[fields.category]?.breeds) {
-    breeds = cat?.[fields.category]?.breeds.sort();
+    breeds = [...new Set(cat?.[fields.category]?.breeds)].sort();
   }
 
   let urlArray: string[] = [];
@@ -108,7 +108,6 @@ const AddPets = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      // send the userID
       body: JSON.stringify({
         age,
         breed,
