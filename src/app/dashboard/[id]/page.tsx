@@ -11,7 +11,6 @@ async function fetchPet(id: string) {
 
 const Profile = async ({ params }: { params: { id: string } }) => {
   const me = await fetchPet(params.id);
-  console.log({ me: me });
   if (!me) {
     notFound();
   }

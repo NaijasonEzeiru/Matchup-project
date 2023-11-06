@@ -100,9 +100,7 @@ const AddPets = () => {
         return (await res).json();
       })
     );
-    console.log({ imgobj: imgObjects });
     const imgUrls = imgObjects.map((a) => a.secure_url);
-    console.log({ imgUrls: imgUrls });
     const res = await fetch(`${apiAddress}/api/pets`, {
       method: 'POST',
       headers: {

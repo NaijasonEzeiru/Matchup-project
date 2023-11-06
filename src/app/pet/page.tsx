@@ -7,6 +7,13 @@ const AllPets = ({
   searchParams?: { [key: string]: string };
 }) => {
   const q = searchParams?.q ?? null;
+  const category = searchParams?.category || '';
+  let breed = searchParams?.breed || '';
+  const gender = searchParams?.gender || '';
+  const country = searchParams?.country || '';
+  const state = searchParams?.state || '';
+  let city = searchParams?.city || '';
+  let purebred = searchParams?.purebred || '';
   return (
     <main className='min-h-[calc(100vh-30rem)] md:min-h-[calc(100vh-15rem)]min-h-[calc(100vh-476px)] md:min-h-[calc(100vh-16rem)]'>
       <header className='m-auto py-8 bg-secondaryBg pt-28 '>

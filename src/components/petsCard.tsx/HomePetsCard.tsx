@@ -2,26 +2,63 @@ import { PetSchemaType } from '@/utils/schemas';
 import VerticalProductCard from './VerticalPetsCard';
 import { NextResponse } from 'next/server';
 import { db } from '@/db/db';
-import { ilike, or } from 'drizzle-orm';
+import { and, ilike, or } from 'drizzle-orm';
 import { pets } from '@/db/schema/schema';
+import { cat, places } from '@/utils/jsons';
 
 export const dynamic = 'force-dynamic';
 
-async function fetchPets(q: string | null) {
+async function fetchPets(
+  q: string | null,
+  breed: string = '',
+  category: string = '',
+  gender: string = '',
+  state: string = '',
+  city: string = '',
+  purebred: string = '',
+  country: string = ''
+) {
   'use server';
   try {
-    const allPets = !q
-      ? await db.query.pets.findMany({ limit: 60 })
-      : await db.query.pets.findMany({
-          where: or(
-            ilike(pets.breed, `%${q}%`),
-            ilike(pets.purebred, `%${q}%`),
-            ilike(pets.age, `%${q}%`),
-            ilike(pets.gender, `%${q}%`),
-            ilike(pets.category, `%${q}%`)
-          ),
-          limit: 60
-        });
+    let allPets: any = [];
+    if (q) {
+      allPets = await db.query.pets.findMany({
+        where: or(
+          ilike(pets.breed, `%${q}%`),
+          ilike(pets.purebred, `%${q}%`),
+          ilike(pets.age, `%${q}%`),
+          ilike(pets.gender, `%${q}%`),
+          ilike(pets.category, `%${q}%`),
+          ilike(pets.country, `%${q}%`)
+        ),
+        limit: 60
+      });
+    } else if (
+      breed ||
+      gender ||
+      category ||
+      country ||
+      state ||
+      city ||
+      purebred
+    ) {
+      if (state) state = places[+state].name;
+      if (category) category = cat[+category].name;
+      allPets = await db.query.pets.findMany({
+        where: and(
+          ilike(pets.breed, breed),
+          ilike(pets.purebred, purebred),
+          ilike(pets.gender, gender),
+          ilike(pets.country, country),
+          ilike(pets.state, state),
+          ilike(pets.city, city),
+          ilike(pets.category, category)
+        ),
+        limit: 60
+      });
+    } else {
+      allPets = await db.query.pets.findMany({ limit: 60 });
+    }
     if (!allPets)
       return new NextResponse(JSON.stringify({ message: 'No pet found' }), {
         status: 401
@@ -48,7 +85,6 @@ const HomePetsCard = async ({ query }: { query: string | null }) => {
 
   const v = await fetchPets(query);
   const pets: PetSchemaType[] = await v.json();
-  console.log(pets);
 
   // const pets: PetSchemaType[] = await data.json();
   // console.log(pets);

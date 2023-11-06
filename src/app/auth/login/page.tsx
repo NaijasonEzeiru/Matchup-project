@@ -34,8 +34,6 @@ const Login = () => {
     resolver: zodResolver(LoginSchema)
   });
 
-  console.log(errors);
-
   // const signIn = async ({ email, password }: LoginSchemaType) => {
   // const res = await fetch(`${apiAddress}/auth/register`, {
   //   method: 'POST',

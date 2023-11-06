@@ -33,8 +33,6 @@ const Register = () => {
 
   const fields = watch();
 
-  console.log(errors);
-
   const signUp = async ({
     email,
     password,

@@ -24,7 +24,6 @@ const PetDetails = async ({ params }: { params: { id: string } }) => {
   const v = postedDate.getTime();
   const w = new Date().getTime();
   const daysAgo = Math.round((w - v) / oneDay);
-  console.log(daysAgo);
 
   return (
     <main>

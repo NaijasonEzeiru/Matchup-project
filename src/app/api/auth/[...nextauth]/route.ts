@@ -81,7 +81,6 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     jwt({ token, account, user }) {
       if (account) {
-        console.log(account);
         token.accessToken = account.access_token;
         token.id = user?.id;
       }

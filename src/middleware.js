@@ -8,11 +8,6 @@ export default async function middleware(req) {
     return NextResponse.next();
   }
 
-  console.log({ cook: req.cookies.get('next-auth.session-token') });
-  console.log({
-    cook_secure: req.cookies.get('__Secure-next-auth.session-token')
-  });
-
   const auth_cookie =
     req.cookies.get('next-auth.session-token') ||
     req.cookies.get('__Secure-next-auth.session-token');
@@ -21,7 +16,6 @@ export default async function middleware(req) {
   //   !req.cookies.has('next-auth.session-token') &&
   //   req.cookies.has('__Secure-next-auth.session-token')
   // ) {
-  //   console.log('Relaying auth cookie');
   //   req.cookies.set({
   //     ...req.cookies.get('__Secure-next-auth.session-token'),
   //     name: 'next-auth.session-token'

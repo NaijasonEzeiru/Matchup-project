@@ -13,7 +13,6 @@ function PetsFilter() {
 
   const {
     register,
-    handleSubmit,
     watch,
     formState: { errors, isSubmitting }
   } = useForm<FilterPetSchemaType>({
@@ -22,7 +21,6 @@ function PetsFilter() {
     resolver: zodResolver(FilterPetSchema),
     defaultValues: {
       country: '',
-      // age: '',
       breed: '',
       city: '',
       state: -1,
@@ -32,9 +30,6 @@ function PetsFilter() {
   });
 
   const fields = watch();
-  console.log(fields);
-
-  console.log(errors);
 
   let place: string[] = [];
 
@@ -44,12 +39,8 @@ function PetsFilter() {
 
   let breeds: string[] = [];
   if (fields.category && cat?.[fields.category]?.breeds) {
-    breeds = cat?.[fields.category]?.breeds;
+    breeds = [...new Set(cat?.[fields.category]?.breeds)].sort();
   }
-
-  console.log(errors);
-
-  const filterPets = async ({}) => {};
 
   return (
     <div className='md:border-r border-opacity-60 md:pr-6 py-11 md:sticky'>
@@ -68,14 +59,23 @@ function PetsFilter() {
             fields={fields.category! > -1}
             placeholder='select category'
           />
+          {fields?.category && fields?.category > -1 && (
+            <SelectInput
+              required={false}
+              disabled={!(fields.category! > -1)}
+              items={breeds}
+              register={register('breed')}
+              errors={errors.breed?.message}
+              fields={fields?.breed?.length! > 0}
+              placeholder='select breed'
+            />
+          )}
           <SelectInput
-            required={false}
-            disabled={!(fields.category! > -1)}
-            items={breeds}
-            register={register('breed')}
-            errors={errors.breed?.message}
-            fields={fields?.breed?.length! > 0}
-            placeholder='select breed'
+            items={['Purebred', 'Mixed']}
+            errors={errors.purebred?.message}
+            fields={fields?.purebred?.length! > 0}
+            placeholder='Purebred?'
+            register={register('purebred')}
           />
           <SelectInput
             required={false}
@@ -101,15 +101,17 @@ function PetsFilter() {
             fields={+fields?.state! > -1}
             placeholder='select state'
           />
-          <SelectInput
-            required={false}
-            disabled={!(+fields?.state! > -1)}
-            items={place}
-            register={register('city')}
-            errors={errors.city?.message}
-            fields={fields?.city?.length! > 0}
-            placeholder='select City'
-          />
+          {fields?.state && +fields?.state > -1 && (
+            <SelectInput
+              required={false}
+              disabled={!(+fields?.state! > -1)}
+              items={place}
+              register={register('city')}
+              errors={errors.city?.message}
+              fields={fields?.city?.length! > 0}
+              placeholder='select City'
+            />
+          )}
           <button type='submit' disabled={isSubmitting} className='btn'>
             Filter
           </button>

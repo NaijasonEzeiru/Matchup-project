@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Loading() {
   return (
-    <div className='w-full h-80 flex items-center justify-center animate-bounce-slow my-8'>
+    <div className='w-full h-80 flex items-center justify-center animate-bounce-slow py-8 pt-36'>
       <svg
         width='200'
         height='200'
