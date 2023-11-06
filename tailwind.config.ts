@@ -13,6 +13,9 @@ const config: Config = {
       aspectRatio: {
         '4/3': '4 / 3'
       },
+      animation: {
+        'bounce-slow': 'bounce 2s infinite'
+      },
       colors: {
         primaryBg: 'var(--primary-bg-color)',
         secondaryBg: 'var(--secondary-bg-color)',
