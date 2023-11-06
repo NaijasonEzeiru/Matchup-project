@@ -67,6 +67,7 @@ const Login = () => {
         if (res?.ok) {
           // callbackUrl
           //   ? router.push(callbackUrl)
+          router.refresh();
           router.push('/?alert=Log in successful');
         } else {
           alert('invalid login details');
