@@ -78,7 +78,7 @@ export const ImgCarousel = ({ imgs }: { imgs: string[] }) => {
         {imgs.map((v, i) => (
           <div
             onClick={() => setImgIndex(i)}
-            className='relative w-full cursor-pointer md:pr-4 '
+            className='relative cursor-pointer md:pr-4 '
             key={i}>
             <Image
               alt=''

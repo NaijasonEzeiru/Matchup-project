@@ -13,6 +13,7 @@ import {
 } from '@/components/helpers/InputFields';
 import { useSession } from 'next-auth/react';
 import { apiAddress } from '@/utils/variables';
+import { revalidatePath } from 'next/cache';
 
 const AddPets = () => {
   const router = useRouter();
@@ -127,6 +128,8 @@ const AddPets = () => {
     const response = await res.json();
     console.log(response);
     if (res.ok) {
+      revalidatePath('/');
+      revalidatePath('/pet');
       router.push('/?alert=Pet uploaded successfully');
     } else {
       alert('Something went wrong');
