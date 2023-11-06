@@ -3,6 +3,7 @@ import { PetSchema } from '@/utils/schemas';
 import { db } from '@/db/db';
 import { pets, users, categories } from '@/db/schema/schema';
 import { eq, ilike, or } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 
 export const GET = async (request: Request, { nextUrl }: { nextUrl: any }) => {
   console.log(request);
@@ -72,6 +73,8 @@ export const POST = async (request: Request, res: Response) => {
       })
       .returning();
     if (pet) {
+      revalidatePath('/');
+      revalidatePath('/pet');
       return new NextResponse(JSON.stringify({ pet }), {
         status: 201
       });
