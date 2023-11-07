@@ -7,18 +7,20 @@ import { places, cat } from '@/utils/jsons';
 import { revalidatePath } from 'next/cache';
 
 export const GET = async (request: Request, { nextUrl }: { nextUrl: any }) => {
-  // console.log(request);
-  // const queryParams = url.parse(request.url, true).query
   const { searchParams } = new URL(request.url);
   console.log(searchParams);
   const q = searchParams?.get('q') || null;
-  let category = searchParams?.get('category') || '';
-  const breed = searchParams?.get('breed') || '';
-  const gender = searchParams?.get('gender') || '';
-  const country = searchParams?.get('country') || '';
-  let state = searchParams?.get('state') || '';
-  const city = searchParams?.get('city') || '';
-  const purebred = searchParams?.get('purebred') || '';
+  const breed = searchParams?.get('breed') || '_';
+  const gender = searchParams?.get('gender') || '_';
+  const country = searchParams?.get('country') || '_';
+  const state = searchParams?.get('state')
+    ? places?.[+searchParams?.get('state')!]?.name
+    : '_';
+  const category = searchParams?.get('category')
+    ? cat?.[+searchParams?.get('category')!]?.name
+    : '_';
+  const city = searchParams?.get('city') || '_';
+  const purebred = searchParams?.get('purebred') || '_';
   console.log({ breed, category, state, city });
   console.log({ q });
   try {
@@ -44,24 +46,22 @@ export const GET = async (request: Request, { nextUrl }: { nextUrl: any }) => {
       city ||
       purebred
     ) {
-      if (state) state = places[+state].name;
-      if (category) category = cat[+category].name;
       console.log({ breed, category, state, city });
       allPets = await db.query.pets.findMany({
         where: and(
-          ilike(pets.breed, breed),
-          ilike(pets.purebred, purebred),
-          ilike(pets.gender, gender),
-          ilike(pets.country, country),
-          ilike(pets.state, state),
-          ilike(pets.city, city),
-          ilike(pets.category, category)
+          ilike(pets.breed, `%${breed}%`),
+          ilike(pets.purebred, `%${purebred}%`),
+          ilike(pets.gender, `%${gender}%`),
+          ilike(pets.country, `%${country}%`),
+          ilike(pets.state, `%${state}%`),
+          ilike(pets.city, `%${city}%`),
+          ilike(pets.category, `%${category}%`)
         ),
         limit: 60
       });
     } else {
       allPets = await db.query.pets.findMany({
-        where: ilike(pets.city, ''),
+        where: ilike(pets.city, '*'),
         limit: 60
       });
     }

@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero';
 import Loading from '@/components/Loading';
 import HomePetsCard from '@/components/petsCard.tsx/HomePetsCard';
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (

@@ -8,56 +8,46 @@ import { cat, places } from '@/utils/jsons';
 
 export const dynamic = 'force-dynamic';
 
-async function fetchPets(
-  q: string | null,
-  breed: string = '',
-  category: string = '',
-  gender: string = '',
-  state: string = '',
-  city: string = '',
-  purebred: string = '',
-  country: string = ''
-) {
+async function fetchPets({
+  query = null,
+  breed = '_',
+  category = '_',
+  city = '_',
+  purebred = '_',
+  country = '_',
+  state = '_',
+  gender = '_'
+}) {
   'use server';
   try {
     let allPets: any = [];
-    if (q) {
+    // const q = props.q;
+    // const { breed, gender, category, country, state, city, purebred } = props;
+    if (query) {
       allPets = await db.query.pets.findMany({
         where: or(
-          ilike(pets.breed, `%${q}%`),
-          ilike(pets.purebred, `%${q}%`),
-          ilike(pets.age, `%${q}%`),
-          ilike(pets.gender, `%${q}%`),
-          ilike(pets.category, `%${q}%`),
-          ilike(pets.country, `%${q}%`)
-        ),
-        limit: 60
-      });
-    } else if (
-      breed ||
-      gender ||
-      category ||
-      country ||
-      state ||
-      city ||
-      purebred
-    ) {
-      if (state) state = places[+state].name;
-      if (category) category = cat[+category].name;
-      allPets = await db.query.pets.findMany({
-        where: and(
-          ilike(pets.breed, breed),
-          ilike(pets.purebred, purebred),
-          ilike(pets.gender, gender),
-          ilike(pets.country, country),
-          ilike(pets.state, state),
-          ilike(pets.city, city),
-          ilike(pets.category, category)
+          ilike(pets.breed, `%${query}%`),
+          ilike(pets.purebred, `%${query}%`),
+          ilike(pets.age, `%${query}%`),
+          ilike(pets.gender, `%${query}%`),
+          ilike(pets.category, `%${query}%`),
+          ilike(pets.country, `%${query}%`)
         ),
         limit: 60
       });
     } else {
-      allPets = await db.query.pets.findMany({ limit: 60 });
+      allPets = await db.query.pets.findMany({
+        where: and(
+          ilike(pets.breed, `%${breed}%`),
+          ilike(pets.purebred, `%${purebred}%`),
+          ilike(pets.gender, `%${gender}%`),
+          ilike(pets.country, `%${country}%`),
+          ilike(pets.state, `%${state}%`),
+          ilike(pets.city, `%${city}%`),
+          ilike(pets.category, `%${category}%`)
+        ),
+        limit: 60
+      });
     }
     if (!allPets)
       return new NextResponse(JSON.stringify({ message: 'No pet found' }), {
@@ -65,6 +55,7 @@ async function fetchPets(
       });
     return new NextResponse(JSON.stringify(allPets), { status: 201 });
   } catch (err) {
+    console.log(err);
     return new NextResponse(
       JSON.stringify({ err, message: 'Something went wrong' }),
       {
@@ -74,7 +65,7 @@ async function fetchPets(
   }
 }
 
-const HomePetsCard = async ({ query }: { query: string | null }) => {
+const HomePetsCard = async (props: any) => {
   // const data = query
   //   ? await fetch(`${apiAddress}/api/pets?q=${query}`, {
   //       cache: 'no-store'
@@ -83,14 +74,14 @@ const HomePetsCard = async ({ query }: { query: string | null }) => {
   //       cache: 'no-store'
   //     });
 
-  const v = await fetchPets(query);
+  const v = await fetchPets(props);
   const pets: PetSchemaType[] = await v.json();
 
   // const pets: PetSchemaType[] = await data.json();
   // console.log(pets);
   if (pets.length) {
     return (
-      <div className='pl-3 md:pl-6 w-full py-11 grid gap-x-3 md:gap-x-5 gap-y-4 md:gap-y-6 gtc grid-flow-row'>
+      <div className='pl-3 md:pl-6 w-full py-11 grid gap-x-3 md:gap-x-5 gap-y-4 md:gap-y-6 gtc grid-flow-row '>
         {pets.map((v) => (
           <VerticalProductCard
             key={v.id}
