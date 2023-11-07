@@ -8,6 +8,7 @@ import { FilterPetSchema, FilterPetSchemaType } from '../utils/schemas';
 import { SelectInput } from '@/components/helpers/InputFields';
 import { TbFilterOff, TbFilter } from 'react-icons/tb';
 import { useRouter } from 'next/navigation';
+import Loading from '@/components/Loading';
 
 function PetsFilter() {
   const [showFilter, setShowFilter] = useState(false);
@@ -45,7 +46,7 @@ function PetsFilter() {
     breeds = [...new Set(cat?.[fields.category]?.breeds)].sort();
   }
 
-  const filter = ({
+  const filter = async ({
     breed,
     category,
     city,
