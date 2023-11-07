@@ -82,7 +82,7 @@ const NavBar = () => {
         }`}>
         <Dropdown
           value={'Categories'}
-          content={['Dogs', 'Cats']}
+          content={['Dog', 'Cat']}
           tab={+ham - 1}
         />
         <hr className='dark:opacity-30' />

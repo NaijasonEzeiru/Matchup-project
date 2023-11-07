@@ -33,7 +33,7 @@ async function fetchPets({
           ilike(pets.category, `%${query}%`),
           ilike(pets.country, `%${query}%`)
         ),
-        limit: 60
+        limit: 24
       });
     } else {
       allPets = await db.query.pets.findMany({
@@ -46,7 +46,8 @@ async function fetchPets({
           ilike(pets.city, `%${city}%`),
           ilike(pets.category, `%${category}%`)
         ),
-        limit: 60
+        limit: 24,
+        orderBy: (pets, { desc }) => [desc(pets.updatedAt)]
       });
     }
     if (!allPets)
@@ -82,17 +83,31 @@ const HomePetsCard = async (props: any) => {
   if (pets.length) {
     return (
       <div className='pl-3 md:pl-6 w-full py-11 grid gap-x-3 md:gap-x-5 gap-y-4 md:gap-y-6 gtc grid-flow-row'>
-        {pets.map((v) => (
-          <VerticalProductCard
-            key={v.id}
-            id={v.id!}
-            location={`${v.city}, ${v.state}`}
-            productName={`${v.breed} ${v.purebred.toLocaleLowerCase()} (${
-              v.age
-            }) ${v.gender}`}
-            img={v.imgs[0]}
-          />
-        ))}
+        {props?.home
+          ? pets
+              .slice(0, 12)
+              .map((v) => (
+                <VerticalProductCard
+                  key={v.id}
+                  id={v.id!}
+                  location={`${v.city}, ${v.state}`}
+                  productName={`${v.breed} ${v.purebred.toLocaleLowerCase()} (${
+                    v.age
+                  }) ${v.gender}`}
+                  img={v.imgs[0]}
+                />
+              ))
+          : pets.map((v) => (
+              <VerticalProductCard
+                key={v.id}
+                id={v.id!}
+                location={`${v.city}, ${v.state}`}
+                productName={`${v.breed} ${v.purebred.toLocaleLowerCase()} (${
+                  v.age
+                }) ${v.gender}`}
+                img={v.imgs[0]}
+              />
+            ))}
       </div>
     );
   } else
