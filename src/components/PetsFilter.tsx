@@ -7,12 +7,15 @@ import { places, cat } from '@/utils/jsons';
 import { FilterPetSchema, FilterPetSchemaType } from '../utils/schemas';
 import { SelectInput } from '@/components/helpers/InputFields';
 import { TbFilterOff, TbFilter } from 'react-icons/tb';
+import { useRouter } from 'next/navigation';
 
 function PetsFilter() {
   const [showFilter, setShowFilter] = useState(false);
+  const router = useRouter();
 
   const {
     register,
+    handleSubmit,
     watch,
     formState: { errors, isSubmitting }
   } = useForm<FilterPetSchemaType>({
@@ -42,6 +45,30 @@ function PetsFilter() {
     breeds = [...new Set(cat?.[fields.category]?.breeds)].sort();
   }
 
+  const filter = ({
+    breed,
+    category,
+    city,
+    country,
+    gender,
+    purebred,
+    state
+  }: FilterPetSchemaType) => {
+    breed = breed || '%_%';
+    // @ts-ignore
+    category = category == -1 ? '%_%' : category;
+    city = city || '%_%';
+    country = country || '%_%';
+    gender = gender || '%_%';
+    // @ts-ignore
+    purebred = purebred || '%_%';
+    // @ts-ignore
+    state = state == -1 ? '%_%' : state;
+    router.push(
+      `/pet?breed=${breed}&category=${category}&city=${city}&country=${country}&purebred=${purebred}&state=${state}&gender=${gender}`
+    );
+  };
+
   return (
     <div className='md:border-r border-opacity-60 md:pr-6 py-11 md:sticky'>
       <div
@@ -50,7 +77,8 @@ function PetsFilter() {
         }`}>
         <form
           className='md:w-72 flex gap-6 flex-col overflow-hidden'
-          aria-hidden={showFilter}>
+          aria-hidden={showFilter}
+          onSubmit={handleSubmit(filter)}>
           <SelectInput
             required={false}
             top={cat}
