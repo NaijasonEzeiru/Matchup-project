@@ -131,7 +131,7 @@ const AddPets = () => {
   };
 
   return (
-    <main>
+    <main className='min-h-[calc(100vh-30rem)] md:min-h-[calc(100vh-15rem)]'>
       <header className='m-auto py-8 bg-secondaryBg pt-28 md:px-16 px-3'>
         <h1 className='text-2xl font-semibold mb-4 text-center'>
           Find Mates for Your Pet

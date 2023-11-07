@@ -81,7 +81,7 @@ const HomePetsCard = async (props: any) => {
   // console.log(pets);
   if (pets.length) {
     return (
-      <div className='pl-3 md:pl-6 w-full py-11 grid gap-x-3 md:gap-x-5 gap-y-4 md:gap-y-6 gtc grid-flow-row '>
+      <div className='pl-3 md:pl-6 w-full py-11 grid gap-x-3 md:gap-x-5 gap-y-4 md:gap-y-6 gtc grid-flow-row'>
         {pets.map((v) => (
           <VerticalProductCard
             key={v.id}

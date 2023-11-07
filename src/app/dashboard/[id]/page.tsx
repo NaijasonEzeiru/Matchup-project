@@ -16,7 +16,7 @@ const Profile = async ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <main>
+    <main className='min-h-[calc(100vh-30rem)] md:min-h-[calc(100vh-15rem)]'>
       <header className='m-auto py-8 bg-secondaryBg pt-28 '>
         <h1 className='text-2xl font-semibold mb-4 md:text-center px-3 md:px-14 lg:px-32 text-center'>
           Your Pets
