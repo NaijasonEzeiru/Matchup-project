@@ -9,7 +9,7 @@ const AllPets = ({
 }: {
   searchParams?: { [key: string]: string };
 }) => {
-  const query = searchParams?.query ?? null;
+  const q = searchParams?.q ?? null;
   const breed = searchParams?.breed || '_';
   const gender = searchParams?.gender || '_';
   const country = searchParams?.country || '_';
@@ -31,7 +31,7 @@ const AllPets = ({
       <div className='flex flex-col md:flex-row gap-6 px-3 md:px-14 lg:px-32'>
         <PetsFilter />
         <HomePetsCard
-          query={query}
+          query={q}
           breed={breed}
           gender={gender}
           country={country}

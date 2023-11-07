@@ -25,7 +25,7 @@ const VerticalProductCard = ({
           // height={144}
           fill
           sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw'
-          alt=''
+          alt={productName}
           className='object-cover relative rounded-t-md h-36 w-full'
           priority
         />

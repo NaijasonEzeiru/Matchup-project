@@ -232,7 +232,7 @@ const AddPets = () => {
                         <span className='w-[198px] h-[132px]'>
                           <Image
                             src={urlArray?.[index]}
-                            alt=''
+                            alt={`image - ${index + 1}`}
                             className='h-full w-full object-cover rounded-lg'
                             width={198}
                             height={132}

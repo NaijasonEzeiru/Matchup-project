@@ -36,7 +36,7 @@ const PetDetails = async ({ params }: { params: { id: string } }) => {
         </h1>
       </header>
       <div className='py-16 px-3 md:px-14 lg:px-32 flex flex-col gap-3'>
-        <ImgCarousel imgs={pet.imgs} />
+        <ImgCarousel imgs={pet.imgs} alt={`${pet.purebred} ${pet.breed}`} />
         <span className='flex flex-wrap justify-between gap-x-14 opacity-70'>
           <span className='flex items-center gap-1'>
             <FaRegClock />{' '}
