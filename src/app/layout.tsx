@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   title:
     'Pets Matchup - Connecting Your Furry Friends with Their Perfect Match',
   description:
-    'Discover the ideal companions for your beloved pets with Pets Matchup. Our platform makes it easy for pet owners to connect, chat, and arrange playdates or potential matches for their furry companions. Find the perfect playmates or even a lifelong partner for your pets today'
+    'Discover the ideal companions for your beloved pets with Pets Matchup. Our platform makes it easy for pet owners to connect, chat, and arrange playdates or potential matches for their furry companions. Find the perfect playmates or even a lifelong partner for your pets today',
+  metadataBase: new URL('https://petsmatchup.vercel.app/')
 };
 
 export default function RootLayout({
