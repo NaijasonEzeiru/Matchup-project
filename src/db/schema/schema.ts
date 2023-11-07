@@ -28,7 +28,7 @@ export const users = pgTable('user', {
   role: text('role', { enum: ['admin', 'user', 'moderator'] })
     .default('user')
     .notNull(),
-  phone: varchar('phone', { length: 20 }).notNull().unique(),
+  phone: varchar('phone', { length: 20 }).unique(),
   createdAt: timestamp('created_at').defaultNow().notNull()
 });
 
