@@ -1,5 +1,5 @@
 import Hero from '@/components/Hero';
-import Loading from '@/components/Loading';
+// import Alert from '@/components/helpers/Alert';
 import HomePetsCard from '@/components/petsCard.tsx/HomePetsCard';
 import Link from 'next/link';
 export const dynamic = 'force-dynamic';
@@ -13,6 +13,8 @@ export default function Home() {
         <Link href={'/pet'} className='btn w-max mb-16'>
           See All Pets
         </Link>
+        {/* <Alert type='error' message='error message' />
+        <Alert type='success' message='success message' /> */}
       </div>
     </main>
   );

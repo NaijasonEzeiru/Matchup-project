@@ -55,16 +55,16 @@ function PetsFilter() {
     purebred,
     state
   }: FilterPetSchemaType) => {
-    breed = breed || '%_%';
+    breed = breed || '_';
     // @ts-ignore
-    category = category == -1 ? '%_%' : category;
-    city = city || '%_%';
-    country = country || '%_%';
-    gender = gender || '%_%';
+    category = category == -1 ? '_' : category;
+    city = city || '_';
+    country = country || '_';
+    gender = gender || '_';
     // @ts-ignore
-    purebred = purebred || '%_%';
+    purebred = purebred || '_';
     // @ts-ignore
-    state = state == -1 ? '%_%' : state;
+    state = state == -1 ? '_' : state;
     router.push(
       `/pet?breed=${breed}&category=${category}&city=${city}&country=${country}&purebred=${purebred}&state=${state}&gender=${gender}`
     );

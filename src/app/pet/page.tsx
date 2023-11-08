@@ -22,7 +22,7 @@ const AllPets = ({
   const city = searchParams?.city || '_';
   const purebred = searchParams?.purebred || '_';
   return (
-    <main className='min-h-[calc(100vh-30rem)] md:min-h-[calc(100vh-15rem)]min-h-[calc(100vh-476px)] md:min-h-[calc(100vh-16rem)]'>
+    <main className='min-h-[calc(100vh-30rem)] md:min-h-[calc(100vh-15rem)]'>
       <header className='m-auto py-8 bg-secondaryBg pt-28 '>
         <h1 className='text-2xl font-semibold mb-4 md:text-center text-center'>
           All Pets

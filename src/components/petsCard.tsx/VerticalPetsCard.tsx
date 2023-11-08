@@ -1,8 +1,9 @@
+import getBase64 from '@/app/api/getLocalBase64';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const VerticalProductCard = ({
+const VerticalProductCard = async ({
   productName,
   location,
   id,
@@ -13,6 +14,7 @@ const VerticalProductCard = ({
   id: string;
   img: string;
 }) => {
+  const myBlurDataUrl = await getBase64(img);
   return (
     <Link
       href={`/pet/${id}`}
@@ -28,6 +30,8 @@ const VerticalProductCard = ({
           alt={productName}
           className='object-cover relative rounded-t-md h-36 w-full'
           priority
+          placeholder='blur'
+          blurDataURL={myBlurDataUrl}
         />
       </div>
       <div className='h-24 bg-secondaryBg w-full flex flex-col px-2 justify-center gap-1 rounded-b-md'>
