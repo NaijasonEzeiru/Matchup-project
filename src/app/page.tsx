@@ -3,7 +3,7 @@ import Toast from '@/components/Toast';
 // import Alert from '@/components/helpers/Alert';
 import HomePetsCard from '@/components/petsCard.tsx/HomePetsCard';
 import Link from 'next/link';
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 export default function Home({
   searchParams

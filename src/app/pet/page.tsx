@@ -2,7 +2,7 @@ import PetsFilter from '@/components/PetsFilter';
 import HomePetsCard from '@/components/petsCard.tsx/HomePetsCard';
 import { cat, places } from '@/utils/jsons';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 const AllPets = ({
   searchParams

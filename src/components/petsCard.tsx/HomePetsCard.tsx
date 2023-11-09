@@ -6,7 +6,7 @@ import { and, ilike, or } from 'drizzle-orm';
 import { pets } from '@/db/schema/schema';
 import { cat, places } from '@/utils/jsons';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 async function fetchPets({
   query = null,
