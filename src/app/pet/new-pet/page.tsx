@@ -13,10 +13,16 @@ import {
 } from '@/components/helpers/InputFields';
 import { useSession } from 'next-auth/react';
 import { apiAddress } from '@/utils/variables';
+import Toast from '@/components/Toast';
 
-const AddPets = () => {
+const AddPets = ({
+  searchParams
+}: {
+  searchParams?: { [key: string]: string };
+}) => {
   const router = useRouter();
   const auth: any = useSession();
+  let alert = searchParams?.alert ?? null;
 
   const {
     register,
@@ -126,7 +132,7 @@ const AddPets = () => {
     if (res.ok) {
       router.push('/?alert=Pet uploaded successfully');
     } else {
-      alert('Something went wrong');
+      alert = 'Something went wrong';
     }
   };
 
@@ -282,6 +288,7 @@ const AddPets = () => {
           Submit
         </button>
       </form>
+      {/* <Toast alert={alert} /> */}
     </main>
   );
 };

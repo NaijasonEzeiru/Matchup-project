@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { ImSpinner } from 'react-icons/im';
@@ -10,19 +10,21 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { signIn } from 'next-auth/react';
 import { LoginSchema, LoginSchemaType } from '../../../utils/schemas';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
-  //   const { user, authChecking }: any = useContext(AuthContext);
-
   const router = useRouter();
   const [showPassword, setShowPassWord] = useState(false);
   const searchParams = useSearchParams();
-  // const callbackUrl = searchParams.get('callbackUrl');
+  const callbackUrl =
+    searchParams.get('callbackUrl') || '/?alert=Log in successful';
+  const alert = searchParams.get('alert');
 
-  //   useEffect(() => {
-  //     // TODO: Display "You are already logged in"
-  //     user && router.push('/');
-  //   }, [user]);
+  useEffect(() => {
+    if (alert) {
+      toast.error(alert);
+    }
+  }, []);
 
   const {
     register,
@@ -34,41 +36,16 @@ const Login = () => {
     resolver: zodResolver(LoginSchema)
   });
 
-  // const signIn = async ({ email, password }: LoginSchemaType) => {
-  // const res = await fetch(`${apiAddress}/auth/register`, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({
-  //     email,
-  //     password
-  //   })
-  // });
-  // const data = await res.json();
-  // if (res.ok) {
-  //   router.push('/login');
-  // } else if (data.message == 'This email address is already taken') {
-  //   setError('email', {
-  //     type: 'server',
-  //     message: data.message
-  //   });
-  // } else {
-  //   alert(data?.message);
-  // }
-  // signIn("credentials", {{email, password}, redirect: false})
-  // };
-
   const logIn = async ({ email, password }: LoginSchemaType) => {
+    // const loadingToast = toast.loading('Submitting');
     await signIn('credentials', { redirect: false, email, password })
       .then((res) => {
         if (res?.ok) {
-          // callbackUrl
-          //   ? router.push(callbackUrl)
+          router.push(callbackUrl);
           router.refresh();
-          router.push('/?alert=Log in successful');
         } else {
-          alert('invalid login details');
+          // toast.dismiss(loadingToast);
+          toast.error('invalid login details');
         }
       })
       .catch((error) => console.log(error));
@@ -157,6 +134,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
+      <Toaster />
     </main>
   );
 };
