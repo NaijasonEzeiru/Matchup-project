@@ -164,7 +164,7 @@ const NavBar = () => {
             onClick={() => setShowUserDropdown(false)}>
             <Link href={`/dashboard/${session.data?.user?.id}`}>Dashboard</Link>
             {/* <Link href={`/dashboard/${session.data?.user?.id}`}>Profile</Link> */}
-            <Link href={'#'}> My Pets</Link>
+            <Link href={`/dashboard/${session.data?.user?.id}/pets`}> My Pets</Link>
             {/* {session.status === 'authenticated' && ( */}
             <Link href={'/pet/new-pet'}> Upload a Pet</Link>
             {/* )} */}

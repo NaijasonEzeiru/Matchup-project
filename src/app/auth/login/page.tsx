@@ -134,7 +134,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
-      <Toaster />
+      {/* <Toaster /> */}
     </main>
   );
 };
