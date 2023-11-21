@@ -40,10 +40,10 @@ const PetDetails = async ({ params }: { params: { id: string } }) => {
         <span className='flex flex-wrap justify-between gap-x-14 opacity-70'>
           <span className='flex items-center gap-1'>
             <FaRegClock />{' '}
-            <i> Posted {daysAgo > 0 ? `${daysAgo} days ago` : 'today'}</i>
+            <i> Posted {daysAgo > 0 ? `${daysAgo} day(s) ago` : 'today'}</i>
           </span>
           <span className='flex items-center gap-1'>
-            <IoLocationOutline />{' '}
+            <IoLocationOutline />
             <i>{`${pet.city}, ${pet.state}, ${pet.country}`}</i>
           </span>
         </span>

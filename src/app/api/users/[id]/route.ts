@@ -2,6 +2,8 @@ import { users } from '@/db/schema/schema';
 import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 import { db } from '@/db/db';
+import isMobilePhone from 'validator/es/lib/isMobilePhone';
+import { revalidateTag } from 'next/cache';
 
 export const GET = async (
   request: Request,
@@ -65,3 +67,28 @@ export const GET = async (
 //     });
 //   }
 // };
+
+export const PATCH = async (request: Request, response: Response) => {
+  const req = await request.json();
+  if (!isMobilePhone(req.body?.phone)) {
+    return new NextResponse(JSON.stringify({ message: 'Invalid phone number' }), {
+      status: 300
+    });
+  }
+  // TODO: revalidateTag 
+  const { phone } = req.body;
+  try {
+    const [updatedUser] = await db
+      .update(users)
+      .set({ phone })
+      .where(eq(users.id, req.params.id))
+      .returning({});
+    return new NextResponse(JSON.stringify(updatedUser), {
+      status: 200
+    });
+  } catch (err) {
+    return new NextResponse(JSON.stringify({ message: 'Operation failed' }), {
+      status: 500
+    });
+  }
+};

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import validator from 'validator';
+import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
 const MAX_FILE_SIZE = 500000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -31,7 +31,7 @@ export const RegisterSchema = z
       .string()
       .email({ message: 'Please input a valid email address' })
       .max(40, { message: 'Must contain at most 40 characters' }),
-    phone: z.string().refine(validator.isMobilePhone),
+    phone: z.string().refine(isMobilePhone),
     password: z
       .string()
       .min(4, { message: 'Must contain at least 4 characters' })
@@ -68,7 +68,7 @@ export const RegisterSchemaApi = z.object({
     .string()
     .email({ message: 'Please input a valid email address' })
     .max(40, { message: 'Must contain at most 40 characters' }),
-  phone: z.string().refine(validator.isMobilePhone),
+  phone: z.string().refine(isMobilePhone),
   password: z
     .string()
     .min(4, { message: 'Must contain at least 4 characters' })
