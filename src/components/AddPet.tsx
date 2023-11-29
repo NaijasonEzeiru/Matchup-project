@@ -24,9 +24,7 @@ const AddPets = ({
   const auth: any = useSession();
   let alert = searchParams?.alert ?? null;
 
-  useEffect(() => {
-
-  }, [])
+  useEffect(() => {}, []);
 
   const {
     register,
@@ -230,7 +228,10 @@ const AddPets = ({
               <div className='flex w-fit gap-2 items-start'>
                 {imgsFields.map((field, index) => (
                   <div key={field.id} className='relative mb-2'>
-                    <label className='mt-2 grid items-center w-[198px] h-[132px] border-dashed rounded-lg border-2 dark:border-[1px]'>
+                    <label
+                      className='mt-2 grid items-center w-[198px] h-[132px] border-dashed rounded-lg border-2 dark:border-[1px]'
+                      tabIndex={0}
+                      aria-label='Add image'>
                       {!urlArray?.[index] ? (
                         <span className=''>
                           {/* <TbCloudUpload /> */}
@@ -261,20 +262,22 @@ const AddPets = ({
                       {errors?.imgs?.[index]?.root?.message as string}
                     </span>
                     {index > 0 && (
-                      <span
+                      <button
+                        aria-label='Remove image input field'
                         onClick={() => removeImgField(index)}
                         className='absolute font-bold text-xl left-[180px] top-2 text-red-400'>
                         X
-                      </span>
+                      </button>
                     )}
                   </div>
                 ))}
               </div>
-              <div
+              <button
+                aria-label='add another image input field'
                 className='text-6xl font-light'
                 onClick={() => appendImgField({ value: undefined })}>
                 +
-              </div>
+              </button>
             </div>
           </div>
         </div>

@@ -13,6 +13,8 @@ const NavBar = () => {
   const session: any = useSession();
   const router = useRouter();
 
+  console.log(session);
+
   return (
     <header
       // ref={navRef}
@@ -112,6 +114,7 @@ const NavBar = () => {
             width='24'
             height='24'
             viewBox='0 0 27 26'
+            aria-hidden
             fill='none'
             className='absolute right-5 bottom-[6px] text-slate-600 peer-focus-within:hidden'
             xmlns='http://www.w3.org/2000/svg'>
@@ -164,7 +167,10 @@ const NavBar = () => {
             onClick={() => setShowUserDropdown(false)}>
             <Link href={`/dashboard/${session.data?.user?.id}`}>Dashboard</Link>
             {/* <Link href={`/dashboard/${session.data?.user?.id}`}>Profile</Link> */}
-            <Link href={`/dashboard/${session.data?.user?.id}/pets`}> My Pets</Link>
+            <Link href={`/dashboard/${session.data?.user?.id}/pets`}>
+              {' '}
+              My Pets
+            </Link>
             {/* {session.status === 'authenticated' && ( */}
             <Link href={'/pet/new-pet'}> Upload a Pet</Link>
             {/* )} */}
@@ -190,7 +196,7 @@ const NavBar = () => {
         }
         aria-expanded={ham}
         aria-controls='navigation'
-        aria-label='Show navigation menus'
+        aria-label='Show navigation menu'
         onClick={() => {
           setHam(!ham);
           setShowUserDropdown(false);

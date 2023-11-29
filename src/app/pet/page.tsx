@@ -28,7 +28,7 @@ const AllPets = ({
           All Pets
         </h1>
       </header>
-      <div className='flex flex-col md:flex-row gap-6 px-3 md:px-14 lg:px-32'>
+      <div className='flex flex-col md:flex-row md:items-start gap-6 px-3 md:px-14 lg:px-32'>
         <PetsFilter />
         <HomePetsCard
           query={q}

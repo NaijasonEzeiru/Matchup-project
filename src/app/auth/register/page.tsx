@@ -211,7 +211,6 @@ const Register = () => {
             {errors.agree?.message}
           </span>
           <button disabled={isSubmitting} className='btn'>
-            {/* add a spinner */}
             <span
               className={`animate-spin text-ctaColor px-4 ${
                 isSubmitting ? 'block' : 'hidden'

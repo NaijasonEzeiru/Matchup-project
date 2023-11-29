@@ -8,7 +8,6 @@ import { FilterPetSchema, FilterPetSchemaType } from '../utils/schemas';
 import { SelectInput } from '@/components/helpers/InputFields';
 import { TbFilterOff, TbFilter } from 'react-icons/tb';
 import { useRouter } from 'next/navigation';
-import Loading from '@/components/Loading';
 
 function PetsFilter() {
   const [showFilter, setShowFilter] = useState(false);
@@ -56,14 +55,14 @@ function PetsFilter() {
     state
   }: FilterPetSchemaType) => {
     breed = breed || '_';
-    // @ts-ignore
+    // @ts-expect-error
     category = category == -1 ? '_' : category;
     city = city || '_';
     country = country || '_';
     gender = gender || '_';
-    // @ts-ignore
+    // @ts-expect-error
     purebred = purebred || '_';
-    // @ts-ignore
+    // @ts-expect-error
     state = state == -1 ? '_' : state;
     router.push(
       `/pet?breed=${breed}&category=${category}&city=${city}&country=${country}&purebred=${purebred}&state=${state}&gender=${gender}`
@@ -71,7 +70,7 @@ function PetsFilter() {
   };
 
   return (
-    <div className='md:border-r border-opacity-60 md:pr-6 py-11 md:sticky'>
+    <div className='md:border-r border-opacity-60 md:pr-6 py-11 md:sticky md:h-[calc(100vh-15rem)]'>
       <div
         className={`grid transition-all ${
           showFilter ? 'grid-rows-[1fr]' : 'grid-rows-[0fr] md:grid-rows-[1fr]'

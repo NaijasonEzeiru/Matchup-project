@@ -299,21 +299,39 @@
 
 // export default AddPets;
 
-
-import { apiAddress } from "@/utils/variables";
-import { getServerSession } from "next-auth/next"
+import AddPets from '@/components/AddPet';
+import { apiAddress } from '@/utils/variables';
+import { getServerSession } from 'next-auth/next';
 import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
-const AddPets = async () => {
-  const session = await getServerSession()
-  const phone = ""
-  let input: string | null = ""
-  if (!phone) {
-    do {
-      input = prompt("You need to provide a phone number so users can contact you\n Please input a valid phone number in international format")
-    } while(input == null || !isMobilePhone(input))
-    const res = await fetch(`${apiAddress}`)
-  }
-  console.log(session)
-  return <div><AddPets /></div>
-}
+const newPet = async () => {
+  // const session = await getServerSession();
+  const phone = '';
+  let input: string | null = '';
+  // if (typeof window != 'undefined' && !phone) {
+  //   do {
+  //     input = prompt(
+  //       'You need to provide a phone number so users can contact you\n Please input a valid phone number in international format'
+  //     );
+  //   } while (input == null || !isMobilePhone(input));
+  //   const res = await fetch(`${apiAddress}/api/users`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       input
+  //     })
+  //   });
+  //   const data = await res.json();
+  //   console.log(data);
+  // }
+  // console.log(session);
+  return (
+    <div>
+      <AddPets />
+    </div>
+  );
+};
+
+export default newPet;
