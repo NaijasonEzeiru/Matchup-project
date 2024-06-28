@@ -7,5 +7,6 @@ const sql = postgres(process.env.DATABASE_URL, { max: 1 });
 const db = drizzle(sql);
 const mig = async () => {
   await migrate(db, { migrationsFolder: 'drizzle' });
+  process.exit(0);
 };
 mig();

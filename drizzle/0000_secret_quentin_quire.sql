@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"emailVerified" timestamp,
 	"image" text,
 	"role" text DEFAULT 'user' NOT NULL,
-	"phone" varchar(20) NOT NULL,
+	"phone" varchar(20),
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "user_email_unique" UNIQUE("email"),
 	CONSTRAINT "user_phone_unique" UNIQUE("phone")

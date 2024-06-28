@@ -13,7 +13,10 @@ import {
 } from '@/components/helpers/InputFields';
 import { useSession } from 'next-auth/react';
 import { apiAddress } from '@/utils/variables';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Toast from './Toast';
+import { FaSpinner } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const AddPets = ({
   searchParams
@@ -22,7 +25,8 @@ const AddPets = ({
 }) => {
   const router = useRouter();
   const auth: any = useSession();
-  let alert = searchParams?.alert ?? null;
+
+  const [alert, setAlert] = useState<null | string>(null);
 
   useEffect(() => {}, []);
 
@@ -130,11 +134,12 @@ const AddPets = ({
       })
     });
     const response = await res.json();
-    console.log(response);
+    console.log({ response });
     if (res.ok) {
-      router.push('/?alert=Pet uploaded successfully');
+      router.push('/?s=Pet uploaded successfully');
     } else {
-      alert = 'Something went wrong';
+      console.log({ res });
+      toast.error(response.message);
     }
   };
 
@@ -292,6 +297,11 @@ const AddPets = ({
           conditions...
         </i>
         <button type='submit' disabled={isSubmitting} className='btn'>
+          {!!isSubmitting && (
+            <span className='animate-spin'>
+              <FaSpinner />
+            </span>
+          )}
           Submit
         </button>
       </form>

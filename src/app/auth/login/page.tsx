@@ -17,12 +17,16 @@ const Login = () => {
   const [showPassword, setShowPassWord] = useState(false);
   const searchParams = useSearchParams();
   const callbackUrl =
-    searchParams.get('callbackUrl') || '/?alert=Log in successful';
+    searchParams.get('callbackUrl') || '/?s=Log in successful';
   const alert = searchParams.get('alert');
+  const successMessage = searchParams.get('s');
 
   useEffect(() => {
     if (alert) {
       toast.error(alert);
+    }
+    if (successMessage) {
+      toast.success(successMessage);
     }
   }, []);
 
@@ -58,7 +62,7 @@ const Login = () => {
           Sign in to PetMatchup
         </h2>
         <button
-          className='flex gap-4 px-5 py-2 border rounded-xl w-max m-auto items-center'
+          className='flex gap-4 px-5 py-2 border rounded-xl w-max m-auto items-center hover:bg-gray-50'
           onClick={() => signIn('github')}>
           <svg
             stroke='currentColor'
@@ -129,7 +133,7 @@ const Login = () => {
           Need a new account?
           <Link
             href='/auth/register'
-            className='text-secondary ml-2 px-2 rounded-md border'>
+            className='text-secondary ml-2 px-2 rounded-md border hover:bg-gray-50'>
             Sign up
           </Link>
         </p>

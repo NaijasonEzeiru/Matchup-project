@@ -21,7 +21,7 @@ const NavBar = () => {
       className='bg-secondaryBg flex items-center justify-between px-3 text-sm py-5 md:px-14 lg:px-32 text-primaryText fixed w-full z-20 top-0'>
       <Link
         href={'/'}
-        className='flex gap-1 md:px-2 md:py-1 md:rounded-lg bg-primaryBg rounded-full md:bg-white items-center md:hover:bg-slate-200 text-black'>
+        className='flex gap-1 md:px-2 md:py-1 md:rounded-lg bg-primaryBg rounded-full md:bg-white items-center hover:md:bg-gray-50 text-black'>
         <svg
           aria-hidden='true'
           width='32'
@@ -89,11 +89,13 @@ const NavBar = () => {
         />
         <hr className='dark:opacity-30' />
         <Link href='#'>
-          <p className='table px-3 w-full cursor-pointer'>Pets For Sale</p>
+          <p className='table px-3 w-full hover:text-gray-500 hover:scale-105'>
+            Pets For Sale
+          </p>
         </Link>
         <hr className='dark:opacity-30' />
-        <Link href='#'>
-          <p className='table px-3 w-full cursor-pointer'>Blog</p>
+        <Link href='#' className='hover:text-gray-500 hover:scale-105'>
+          <p className='table px-3 w-full'>Blog</p>
         </Link>
         <hr className='dark:opacity-30' />
         <search className='px-3 relative'>
@@ -101,7 +103,7 @@ const NavBar = () => {
             type='search'
             placeholder='Search'
             id='search'
-            className='rounded-lg md:w-32 w-full py-2 px-5 border border-ctaColor focus-within:w-full text-black peer'
+            className='rounded-lg md:w-32 w-full py-2 px-5 border border-ctaColor focus-within:w-full text-black peer hover:scale-105'
             value={query}
             onKeyDown={(e) => {
               e.key === 'Enter' && router.push(`/pet?q=${query}`);
@@ -140,7 +142,7 @@ const NavBar = () => {
             setShowUserDropdown(!showUserDropdown);
             setHam(false);
           }}
-          className='group relative cursor-pointer p-1 rounded-full border-solid border-[1px] border-primaryText bg-primaryBg'>
+          className='group relative p-1 rounded-full border-solid border-[1px] border-primaryText bg-primaryBg hover:scale-105'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -157,31 +159,42 @@ const NavBar = () => {
         </button>
         <div
           aria-hidden={showUserDropdown}
-          className={`grid transition-all absolute justify-center -translate-x-1/2 left-1/2 w-full bg-secondaryBg top-16 md:w-48 md:top-11 rounded-b-xl ${
+          className={`grid transition-all absolute justify-center -translate-x-1/2 left-1/2 w-full bg-secondaryBg top-16 md:top-11 rounded-b-xl md:w-48 ${
             showUserDropdown
               ? 'grid-rows-[1fr] p-5  md:border md:border-primaryText'
               : 'grid-rows-[0fr]'
           }`}>
           <div
-            className='max-h-full overflow-hidden items-center w-max flex flex-col gap-3'
+            className='max-h-full overflow-hidden items-center w-max flex flex-col gap-1'
             onClick={() => setShowUserDropdown(false)}>
-            <Link href={`/dashboard/${session.data?.user?.id}`}>Dashboard</Link>
+            <Link
+              href={`/dashboard/${session.data?.user?.id}`}
+              className='hover:bg-slate-200 md:w-32 rounded block text-center py-1.5'>
+              Dashboard
+            </Link>
             {/* <Link href={`/dashboard/${session.data?.user?.id}`}>Profile</Link> */}
-            <Link href={`/dashboard/${session.data?.user?.id}/pets`}>
+            <Link
+              href={`/dashboard/${session.data?.user?.id}/pets`}
+              className='hover:bg-slate-200 md:w-32 rounded block text-center py-1.5'>
               {' '}
               My Pets
             </Link>
             {/* {session.status === 'authenticated' && ( */}
-            <Link href={'/pet/new-pet'}> Upload a Pet</Link>
+            <Link
+              href={'/pet/new-pet'}
+              className='hover:bg-slate-200 md:w-32 rounded block text-center py-1.5'>
+              {' '}
+              Upload a Pet
+            </Link>
             {/* )} */}
             {session.status !== 'authenticated' ? (
               <Link href={'/auth/login'}>
                 {' '}
-                <button className='btn w-[70vw] md:w-32'>Login</button>
+                <button className='btn w-[70vw] md:w-32 mt-1'>Login</button>
               </Link>
             ) : (
               <button
-                className='btn w-[70vw] md:w-32'
+                className='btn w-[70vw] md:w-32 mt-1'
                 onClick={() => signOut()}>
                 Logout
               </button>

@@ -3,10 +3,19 @@
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
-export default function Toast({ alert }: { alert: string | null }) {
+export default function Toast({
+  alert,
+  successMessage
+}: {
+  alert: string | null;
+  successMessage?: string | null;
+}) {
   useEffect(() => {
     if (alert) {
-      toast.success(alert);
+      toast.error(alert);
+    }
+    if (successMessage) {
+      toast.success(successMessage);
     }
   }, []);
   return (

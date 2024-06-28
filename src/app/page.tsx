@@ -11,6 +11,7 @@ export default function Home({
   searchParams?: { [key: string]: string };
 }) {
   const alert = searchParams?.alert ?? null;
+  const s = searchParams?.s ?? null;
   return (
     <main className='min-h-[calc(100vh-30rem)] md:min-h-[calc(100vh-15rem)]'>
       <Hero />
@@ -21,7 +22,7 @@ export default function Home({
         <Link href={'/pet'} className='btn w-max mb-16'>
           See All Pets
         </Link>
-        <Toast alert={alert} />
+        <Toast alert={alert} successMessage={s} />
       </div>
     </main>
   );

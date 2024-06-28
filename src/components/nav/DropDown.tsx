@@ -15,7 +15,7 @@ const Dropdown = ({
   return (
     <span className='relative'>
       <button
-        className='flex text-sm gap-1 px-3 items-center w-full md:w-min'
+        className='flex text-sm gap-1 px-3 items-center w-full md:w-min hover:scale-105 hover:text-gray-500'
         onClick={() => setDropdown(!dropdown)}
         aria-expanded='false'
         aria-controls={value}
@@ -42,14 +42,18 @@ const Dropdown = ({
       <div
         aria-hidden={dropdown}
         id={value}
-        className={`grid transition-all relative md:absolute md:justify-center -translate-x-1/2 left-1/2 bg-secondaryBg md:top-10 md:w-36 rounded-b-xl ${
+        className={`grid transition-all relative md:absolute md:justify-center -translate-x-1/2 left-1/2 bg-secondaryBg md:top-10 rounded-b-xl ${
           dropdown
-            ? 'grid-rows-[1fr] pt-2 md:py-5 px-10  md:border md:border-primaryText'
+            ? 'grid-rows-[1fr] pt-2 md:py-3 md:border md:border-primaryText'
             : 'grid-rows-[0fr]'
         }`}>
-        <div className='max-h-full overflow-hidden items-center w-max flex flex-col gap-2'>
+        <div className='max-h-full overflow-hidden items-center w-max flex flex-col gap-1'>
           {content.map((item: string, i: number) => (
-            <Link href={`/pet?q=${item}`} tabIndex={+dropdown - 1} key={i}>
+            <Link
+              href={`/pet?q=${item}`}
+              tabIndex={+dropdown - 1}
+              key={i}
+              className='hover:bg-slate-200 w-max block md:w-36 py-1.5 text-center'>
               {item}
             </Link>
           ))}

@@ -15,14 +15,14 @@ import {
 } from 'drizzle-orm/pg-core';
 import { AdapterAccount } from 'next-auth/adapters';
 
-export const users = pgTable('user', {
+export const users = pgTable('users', {
   id: text('id')
     .primaryKey()
     .notNull()
     .default(sql`gen_random_uuid()`),
-  name: varchar('name', { length: 120 }).notNull(),
-  passwordHash: varchar('password_hash', { length: 120 }),
-  email: varchar('email', { length: 120 }).notNull().unique(),
+  name: varchar('name', { length: 60 }).notNull(),
+  passwordHash: varchar('password_hash', { length: 120 }).notNull(),
+  email: varchar('email', { length: 50 }).notNull().unique(),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   role: text('role', { enum: ['admin', 'user', 'moderator'] })
@@ -37,7 +37,7 @@ export const userRelations = relations(users, ({ many }) => ({
 }));
 
 export const accounts = pgTable(
-  'account',
+  'accounts',
   {
     userId: text('userId')
       .notNull()
@@ -83,7 +83,7 @@ export type NewUser = InferInsertModel<typeof users>;
 //   user        User   @relation(fields: [user_id], references: [id])
 // }
 
-export const pets = pgTable('pet', {
+export const pets = pgTable('pets', {
   id: uuid('id').primaryKey().defaultRandom(),
   petName: varchar('pet_name', { length: 20 }).notNull(),
   country: varchar('country', { length: 20 }).notNull(),
@@ -122,7 +122,7 @@ export const petsRelations = relations(pets, ({ one }) => ({
 export type Pet = InferSelectModel<typeof pets>;
 export type NewPet = InferInsertModel<typeof pets>;
 
-export const categories = pgTable('category', {
+export const categories = pgTable('categories', {
   name: text('name').primaryKey()
 });
 

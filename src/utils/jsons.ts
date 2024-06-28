@@ -1198,6 +1198,8 @@ export const cat = [
 ];
 
 export const agesArr = [
+  '1 - 3 months',
+  '4 - 6 months',
   '7 - 12 months',
   '1 - 2 years',
   '2 - 3 years',

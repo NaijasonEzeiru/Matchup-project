@@ -22,7 +22,6 @@ const Register = () => {
     register,
     handleSubmit,
     setError,
-    watch,
     control,
     formState: { errors, isSubmitting }
   } = useForm<RegisterSchemaType>({
@@ -30,8 +29,6 @@ const Register = () => {
     reValidateMode: 'onSubmit',
     resolver: zodResolver(RegisterSchema)
   });
-
-  const fields = watch();
 
   const signUp = async ({
     email,
@@ -53,7 +50,7 @@ const Register = () => {
     });
     const data = await res.json();
     if (res.ok) {
-      router.push('/auth/login?alert=Registration successful');
+      router.push('/auth/login?s=Registration successful');
     } else if (data.message == 'A user with this email already exists') {
       setError('email', {
         type: 'server',
@@ -74,7 +71,7 @@ const Register = () => {
       <div className='flex gap-11 flex-col w-full m-auto max-w-sm'>
         <h2 className='text-secondary text-4xl font-medium mt-8'>Register</h2>
         <button
-          className='flex gap-4 px-5 py-2 border rounded-xl w-max m-auto items-center'
+          className='flex gap-4 px-5 py-2 border rounded-xl w-max m-auto items-center hover:bg-gray-50'
           onClick={() => signIn('github')}>
           <svg
             stroke='currentColor'
@@ -138,7 +135,7 @@ const Register = () => {
               // rules={{ validate: (value) => isValidPhoneNumber(value) }}
               render={({ field }) => (
                 <PhoneInput
-                  defaultCountry='NG'
+                  // defaultCountry='NG'
                   className='gap-2'
                   id='phone'
                   {...field}
@@ -224,7 +221,7 @@ const Register = () => {
           Already have an account?
           <Link
             href='/auth/login'
-            className='text-secondary ml-2 px-2 rounded-md border'>
+            className='text-secondary ml-2 px-2 rounded-md border hover:bg-gray-50'>
             log in
           </Link>
         </p>

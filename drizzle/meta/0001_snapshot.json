@@ -1,11 +1,11 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "15403885-7096-42a2-abf0-e486f4ae2b1a",
-  "prevId": "f4289140-0c0d-42b2-914b-99e039db087d",
+  "id": "b30ff39b-44e4-4b39-92f3-694b70751f6c",
+  "prevId": "4a6e3007-9245-45b2-a5f8-0fb90a36b683",
   "tables": {
-    "account": {
-      "name": "account",
+    "accounts": {
+      "name": "accounts",
       "schema": "",
       "columns": {
         "userId": {
@@ -77,10 +77,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "account_userId_user_id_fk": {
-          "name": "account_userId_user_id_fk",
-          "tableFrom": "account",
-          "tableTo": "user",
+        "accounts_userId_users_id_fk": {
+          "name": "accounts_userId_users_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
@@ -92,8 +92,8 @@
         }
       },
       "compositePrimaryKeys": {
-        "account_provider_providerAccountId": {
-          "name": "account_provider_providerAccountId",
+        "accounts_provider_providerAccountId": {
+          "name": "accounts_provider_providerAccountId",
           "columns": [
             "provider",
             "providerAccountId"
@@ -102,8 +102,8 @@
       },
       "uniqueConstraints": {}
     },
-    "category": {
-      "name": "category",
+    "categories": {
+      "name": "categories",
       "schema": "",
       "columns": {
         "name": {
@@ -118,8 +118,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "pet": {
-      "name": "pet",
+    "pets": {
+      "name": "pets",
       "schema": "",
       "columns": {
         "id": {
@@ -218,10 +218,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "pet_user_id_user_id_fk": {
-          "name": "pet_user_id_user_id_fk",
-          "tableFrom": "pet",
-          "tableTo": "user",
+        "pets_user_id_users_id_fk": {
+          "name": "pets_user_id_users_id_fk",
+          "tableFrom": "pets",
+          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
@@ -231,10 +231,10 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "pet_category_category_name_fk": {
-          "name": "pet_category_category_name_fk",
-          "tableFrom": "pet",
-          "tableTo": "category",
+        "pets_category_categories_name_fk": {
+          "name": "pets_category_categories_name_fk",
+          "tableFrom": "pets",
+          "tableTo": "categories",
           "columnsFrom": [
             "category"
           ],
@@ -273,10 +273,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "session_userId_user_id_fk": {
-          "name": "session_userId_user_id_fk",
+        "session_userId_users_id_fk": {
+          "name": "session_userId_users_id_fk",
           "tableFrom": "session",
-          "tableTo": "user",
+          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
@@ -290,8 +290,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "user": {
-      "name": "user",
+    "users": {
+      "name": "users",
       "schema": "",
       "columns": {
         "id": {
@@ -303,7 +303,7 @@
         },
         "name": {
           "name": "name",
-          "type": "varchar(120)",
+          "type": "varchar(60)",
           "primaryKey": false,
           "notNull": true
         },
@@ -311,11 +311,11 @@
           "name": "password_hash",
           "type": "varchar(120)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "varchar(120)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
@@ -356,15 +356,15 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "user_email_unique": {
-          "name": "user_email_unique",
+        "users_email_unique": {
+          "name": "users_email_unique",
           "nullsNotDistinct": false,
           "columns": [
             "email"
           ]
         },
-        "user_phone_unique": {
-          "name": "user_phone_unique",
+        "users_phone_unique": {
+          "name": "users_phone_unique",
           "nullsNotDistinct": false,
           "columns": [
             "phone"
@@ -413,7 +413,12 @@
   "schemas": {},
   "_meta": {
     "schemas": {},
-    "tables": {},
+    "tables": {
+      "\"account\"": "\"accounts\"",
+      "\"category\"": "\"categories\"",
+      "\"pet\"": "\"pets\"",
+      "\"user\"": "\"users\""
+    },
     "columns": {}
   }
 }
